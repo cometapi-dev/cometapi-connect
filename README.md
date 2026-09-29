@@ -1,8 +1,10 @@
 # CometAPI Connect
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-2ea44f.svg)](LICENSE) [![Python: 3.9–3.14](https://img.shields.io/badge/Python-3.9%E2%80%933.14-3776AB.svg)](pyproject.toml) [![Release: v0.1.3](https://img.shields.io/badge/Release-v0.1.3-1f883d.svg)](https://github.com/cometapi-dev/cometapi-connect/releases/tag/v0.1.3)
+
 Connect your AI tools to [CometAPI](https://www.cometapi.com/) from one local interface. CometAPI Connect detects installed applications, previews configuration changes, and saves the settings needed to use your CometAPI account.
 
-Maintained by CometAPI. This project is in active development; integration availability depends on your operating system, installed application, and configuration. Development builds are not a guarantee of compatibility with every upstream release.
+Maintained by CometAPI. Integration availability depends on your operating system, installed application, and configuration. See the [support matrix](cometapi_helper/catalog.json) for the integrations and limitations described by the application catalog.
 
 ## What it does
 
@@ -16,25 +18,29 @@ CometAPI Connect configures applications that are already installed. The in-app 
 
 ## Get started
 
-### Development downloads
+### Download CometAPI Connect v0.1.3
 
-Windows and macOS development builds are available as artifacts from successful [GitHub Actions runs](https://github.com/cometapi-dev/cometapi-connect/actions). Sign in with repository access, select a run for the commit you want to test, and download its artifact ZIP.
+Download the latest stable release from [GitHub Releases](https://github.com/cometapi-dev/cometapi-connect/releases/tag/v0.1.3). The release is private while CometAPI completes its publication review; you need repository access to download it.
 
-| Platform | Workflow | Artifact | Application |
-| --- | --- | --- | --- |
-| Windows x64 | [Windows test download](https://github.com/cometapi-dev/cometapi-connect/actions/workflows/windows-test.yml) | `cometapi-connect-windows-x64` | `.exe` |
-| macOS Apple Silicon | [macOS test downloads](https://github.com/cometapi-dev/cometapi-connect/actions/workflows/macos-test.yml) | `cometapi-connect-macos-arm64` | `.dmg` |
-| macOS Intel | [macOS test downloads](https://github.com/cometapi-dev/cometapi-connect/actions/workflows/macos-test.yml) | `cometapi-connect-macos-x86_64` | `.dmg` |
+| Platform | Download | Verification files |
+| --- | --- | --- |
+| Windows x64 | [EXE](https://github.com/cometapi-dev/cometapi-connect/releases/download/v0.1.3/CometAPI-Connect-0.1.3-windows-x64-unsigned.exe) | [`windows-x64.json`](https://github.com/cometapi-dev/cometapi-connect/releases/download/v0.1.3/windows-x64.json), [SHA-256](https://github.com/cometapi-dev/cometapi-connect/releases/download/v0.1.3/CometAPI-Connect-0.1.3-windows-x64-unsigned.exe.sha256) |
+| macOS Apple Silicon or Intel | [Universal2 DMG](https://github.com/cometapi-dev/cometapi-connect/releases/download/v0.1.3/CometAPI-Connect-0.1.3-macos-universal2-unsigned.dmg) | [`macos-universal2.json`](https://github.com/cometapi-dev/cometapi-connect/releases/download/v0.1.3/macos-universal2.json), [SHA-256](https://github.com/cometapi-dev/cometapi-connect/releases/download/v0.1.3/CometAPI-Connect-0.1.3-macos-universal2-unsigned.dmg.sha256) |
+| Linux x64 | [Tarball](https://github.com/cometapi-dev/cometapi-connect/releases/download/v0.1.3/CometAPI-Connect-0.1.3-linux-x64.tar.gz) | [`linux-x64.json`](https://github.com/cometapi-dev/cometapi-connect/releases/download/v0.1.3/linux-x64.json), [SHA-256](https://github.com/cometapi-dev/cometapi-connect/releases/download/v0.1.3/CometAPI-Connect-0.1.3-linux-x64.tar.gz.sha256) |
 
-These workflows produce unsigned test builds; macOS test builds are not notarized. Each artifact includes a checksum and build metadata. Inspect the workflow result and artifact metadata before running a build. Artifacts expire after 30 days. Standalone builds bundle Python and their runtime dependencies.
+These are unsigned development builds; the macOS build is not notarized. Verify the SHA-256 sidecar and inspect the JSON metadata before running a download. Standalone builds bundle Python and their runtime dependencies. Native Windows ARM, 32-bit systems, and musl/Alpine Linux are outside the current build matrix.
 
-1. Extract the downloaded ZIP. On Windows, open the EXE. On macOS, open the DMG and copy CometAPI Connect to Applications.
+1. Extract the Linux tarball, open the Windows EXE, or open the macOS DMG and copy CometAPI Connect to Applications.
 2. Open the app. Its local interface starts in your default browser.
 3. Enter your [CometAPI API key](https://www.cometapi.com/console/token), select the applications you want to connect, and close those applications.
 4. Choose **Review changes**, inspect the proposed settings, then choose **Connect selected apps**.
 5. Reopen the configured applications and verify a task. Use **Change history** to restore previous settings when needed.
 
 Restore refuses to overwrite settings changed after configuration. Existing project overrides, selected assistants, or operating-system credential prompts may require additional steps shown by the adapter.
+
+### Development builds
+
+The [GitHub Actions workflows](https://github.com/cometapi-dev/cometapi-connect/actions) also publish short-lived artifacts for pull requests and maintainer testing. These artifacts expire and are not a substitute for the versioned release above.
 
 ### Run from source
 
@@ -80,7 +86,7 @@ node tests/i18n.test.cjs
 
 Automated tests use isolated fixtures and dummy credentials. Passing fixture tests or building an executable does not establish live compatibility with every supported application. Platform-specific checks run on their corresponding operating systems.
 
-Read the [contribution guide](CONTRIBUTING.md), [architecture](ARCHITECTURE.md), [language guide](docs/i18n.md), and [release packaging guide](distribution/README.md) for details.
+Read the [contribution guide](CONTRIBUTING.md), [architecture](ARCHITECTURE.md), [language guide](docs/i18n.md), [release notes](CHANGELOG.md), [community code of conduct](CODE_OF_CONDUCT.md), and [release packaging guide](distribution/README.md) for details.
 
 ## Support and security
 

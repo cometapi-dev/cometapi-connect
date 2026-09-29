@@ -1,3 +1,3 @@
 """CometAPI Connect: local, reversible AI client configuration."""
 
-__version__ = "0.1.3.dev10"
+__version__ = "0.1.3"
