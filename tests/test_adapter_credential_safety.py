@@ -84,7 +84,12 @@ def test_compose_renders_private_key_preserving_existing_environment(tmp_path, e
     executable = shutil.which("docker")
     if not executable:
         pytest.skip("Docker Compose is needed to render the fixture")
-    version = subprocess.run([executable, "compose", "version"], capture_output=True, timeout=10)
+    try:
+        version = subprocess.run(
+            [executable, "compose", "version"], capture_output=True, timeout=10
+        )
+    except (FileNotFoundError, OSError, subprocess.TimeoutExpired):
+        pytest.skip("Docker Compose is unavailable")
     if version.returncode:
         pytest.skip("Docker Compose is unavailable")
     root, compose, engine = lobe(tmp_path, "override-to-remove", env_file)

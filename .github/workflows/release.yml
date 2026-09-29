@@ -59,7 +59,7 @@ jobs:
             --output "$package"
           printf '%s  %s\n' "$PYTHON_MACOS_SHA256" "$package" | shasum -a 256 -c -
           pkgutil --check-signature "$package" > "$RUNNER_TEMP/python-signature.txt"
-          rg -q 'Python Software Foundation' "$RUNNER_TEMP/python-signature.txt"
+          grep -q 'Python Software Foundation' "$RUNNER_TEMP/python-signature.txt"
           sudo installer -pkg "$package" -target /
           /Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13 -m venv .release-venv
           echo "$GITHUB_WORKSPACE/.release-venv/bin" >> "$GITHUB_PATH"
