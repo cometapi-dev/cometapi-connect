@@ -429,13 +429,15 @@ def test_restore_refuses_writing_previous_credentials_to_tracked_file(tmp_path):
     assert engine.history()["transactions"][0]["status"] == "applied"
 
 
-def test_failed_credential_rollback_keeps_ignore_protection(tmp_path, monkeypatch):
+@pytest.mark.parametrize("newline", [b"\n", b"\r\n"], ids=["lf", "crlf"])
+def test_failed_credential_rollback_keeps_ignore_protection(tmp_path, monkeypatch, newline):
     root = tmp_path / "project"
     root.mkdir()
     git(root, "init", "--quiet")
     paths = [root / ".first-private.json", root / ".second-private.json"]
     for path in paths:
-        path.write_text(OLD_KEY + "\n", encoding="utf-8")
+        path.write_bytes(OLD_KEY.encode() + newline)
+    original_bytes = {path: path.read_bytes() for path in paths}
     fake_sidecar_adapter(monkeypatch, paths)
     engine = make_engine(tmp_path, root)
     plan = preview(engine)
@@ -444,7 +446,7 @@ def test_failed_credential_rollback_keeps_ignore_protection(tmp_path, monkeypatc
     def fail_write_and_rollback(path, data, *args, **kwargs):
         if path == paths[1] and data == (KEY + "\n").encode():
             raise OSError("Injected second credential write failure")
-        if path == paths[0] and data == (OLD_KEY + "\n").encode():
+        if path == paths[0] and data == original_bytes[path]:
             raise OSError("Injected first credential rollback failure")
         return original_write(path, data, *args, **kwargs)
 
@@ -453,8 +455,8 @@ def test_failed_credential_rollback_keeps_ignore_protection(tmp_path, monkeypatc
         engine.apply(plan["plan_id"])
 
     assert_safe_error(error)
-    assert paths[0].read_text() == KEY + "\n"
-    assert paths[1].read_text() == OLD_KEY + "\n"
+    assert paths[0].read_bytes() == (KEY + "\n").encode()
+    assert paths[1].read_bytes() == original_bytes[paths[1]]
     assert (root / ".gitignore").is_file()
     for path in paths:
         git(root, "check-ignore", "--", path.name)
