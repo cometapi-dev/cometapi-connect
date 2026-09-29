@@ -23,7 +23,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = ["tomlkit==0.13.3", "ruamel.yaml==0.18.16", "json5==0.12.1", "certifi==2026.7.22", 'cryptography==50.0.1; sys_platform != "darwin"', 'plyvel-ci==1.5.1; python_version < "3.13"', 'plyvel-next==2.1.2; python_version >= "3.13"']
+dependencies = ["tomlkit==0.15.1", "ruamel.yaml==0.18.16", "json5==0.12.1", "certifi==2026.7.22", 'cryptography==50.0.1; sys_platform != "darwin"', 'plyvel-ci==1.5.1; python_version < "3.13"', 'plyvel-next==2.1.2; python_version >= "3.13"']
 
 [project.urls]
 Homepage = "https://www.cometapi.com/"
