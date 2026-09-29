@@ -45,7 +45,7 @@ include = ["cometapi_helper*"]
 testpaths = ["tests"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8,<9", "ruff==0.16.8"]
+dev = ["pytest>=8,<9", "ruff==0.16.9"]
 
 [tool.ruff]
 target-version = "py39"
