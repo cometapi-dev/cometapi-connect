@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "plugin": {
+    "id": "lmstudio/openai-compat-endpoint",
+    "revision": 9,
+    "source": "https://lmstudio.ai/lmstudio/openai-compat-endpoint",
+    "source_files_url_template": "https://lmstudio.ai/lmstudio/openai-compat-endpoint/files/{path}",
+    "upstream_license_declaration": "ISC",
+    "license_note": "The upstream package declares ISC and supplies no separate root license or copyright notice. Original package metadata, source, and third-party notices are preserved."
+  },
+  "source_sha256": {
+    "package.json": "1c7f0570a84bbfd0fb295162767493f6bf2dacf06e8d64709fd9d5ebe39b4691",
+    "manifest.json": "e083d0dd69fd57ce4f6af2cfed4d7e56de36ccbf40c5921f96aaad25ce9cea78",
+    ".lmstudio/entry.ts": "10ead36564a4b950a4a4246544c0d25ab9ca28561f97492eafc941925a578057",
+    "src/index.ts": "0498df2792983744716a1992f2314b382acf3a886249ef4eebc2a46a4b823730",
+    "src/config.ts": "23b30a8dec9052717969c03bea410986ad7dddf58067c1fae45736248fa89ad5",
+    "src/generator.ts": "4035227d7660d2021d8227832219b1411860ba2f5c20d7a15a043ec810e6475d",
+    "tsconfig.json": "8cb35d9da741e7c4441b3cd01da0035cfa386a2f94402078c449df4718c4b640"
+  },
+  "build": {
+    "esbuild_version": "0.25.10",
+    "arguments": [
+      ".lmstudio/entry.ts",
+      "--bundle",
+      "--platform=node",
+      "--target=node18",
+      "--format=cjs",
+      "--packages=external",
+      "--charset=utf8",
+      "--legal-comments=inline",
+      "--outfile=.lmstudio/production.js"
+    ]
+  },
+  "ws": {
+    "version": "8.21.0",
+    "tarball_url": "https://registry.npmjs.org/ws/-/ws-8.21.0.tgz",
+    "integrity": "sha512-Vsp28b7DRcimFQvrqu2Wek3z1iYxDCWqHYB8Qsnk/S4RfaCQzPGPyBNuVjJV3cd6UiKtUtp6sNM77gWvzcCH+g==",
+    "tarball_sha256": "d08b726b3aae3a0fed5218a0d9a4b2ac8d75d4ad453a9271db55fe38e94eb4cf",
+    "files_sha256": {
+      "LICENSE": "2b29dcfe0d6471f7e8c92c5fb38c9f93edee10330937055440192f1832b1ecef",
+      "browser.js": "010da44addea1d88b2b732540c3f1fd0cbcb28926b96623d4c64222e0ead2d0e",
+      "lib/buffer-util.js": "8b0a45739132f82e25ea13163780abf547ccfe989267f3eb7abb475beec92da3",
+      "lib/constants.js": "391e823142b8b370e55a2fd32b022deaf03b8415c56000009674ebc86a0b4f86",
+      "lib/event-target.js": "c45d3c6e12d170c860c0c3f1a050aa0f864d9806632b609a1e607d675aba128c",
+      "lib/extension.js": "852564f0f6b460287043803eae732666fb5610f676874354fc89f06aa4e986ed",
+      "index.js": "924564d5be26d59b9682c4263f68320e48dde7240bd2d1ad17ec305537429dd2",
+      "lib/limiter.js": "e0469d4b83f6ba764b15f80e1766b75c136fbff68f048f4c050f0b1c7f065f69",
+      "lib/permessage-deflate.js": "02c31796f0132a335d4efe7b7adcebadbb69543a1ce65ae04aaccc3530e27ab9",
+      "lib/receiver.js": "4879edbf8e48d04d09783cf9c04b5e25f5a448247bb01279438ded2899747220",
+      "lib/sender.js": "d0791d30c3defd44dcabbddb879a901c757993fea2c00a7ffea01d53b23b4b77",
+      "lib/stream.js": "a56fcb6e2b152097ee820b6f5410b1f71e59819b45d08d9f8bda588fe39070ec",
+      "lib/subprotocol.js": "be3f6323d6f549568577dcba9004c1479d95c65a7abb0fe0c582875b9fac0b7c",
+      "lib/validation.js": "41ce8e83d0d434132e1704895fedb91f6703a701b42d91c80954ab29b2845593",
+      "lib/websocket-server.js": "29029a4d346800c792300df153df2007e9805d9d7b67b0883f9730b64f25b1c8",
+      "lib/websocket.js": "48fdb0f54c1f8ce580d3cfa2908fe7d96fe18f06f9d82306950441cb09b5db26",
+      "package.json": "584ce6e7516587ba249dc910b0c04e2753f6b3f451fc3a5bc324f7735bdacc71",
+      "README.md": "bb979132f3cbff08ce47f36d041e18071f8f534d01f591c0b129ba7abf1e480e",
+      "wrapper.mjs": "fe154662301fd558f935f9c217fccbe7a7dac02ff39e648a000589403ff27c7f"
+    }
+  },
+  "undici_license": {
+    "package": "undici-types",
+    "version": "5.26.5",
+    "source": "https://raw.githubusercontent.com/nodejs/undici/v5.26.5/LICENSE",
+    "sha256": "a6db8096b2707bc0102d256917d4d33f298ba36d8c3f25de067a2b5bb379db27"
+  },
+  "changes": [
+    "Rebuild production.js from the preserved revision 9 sources with relative paths and no source map.",
+    "Replace ws 8.18.2 with verified ws 8.21.0 files and update both npm locks.",
+    "Add the Undici 5.26.5 MIT license for undici-types.",
+    "Remove installation-state metadata and build logs."
+  ]
+}

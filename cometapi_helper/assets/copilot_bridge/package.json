@@ -1,0 +1,1 @@
+{"name":"cometapi-native-copilot-setup","publisher":"cometapi","version":"0.0.1","engines":{"vscode":"*"},"activationEvents":["onStartupFinished"],"main":"extension.cjs"}

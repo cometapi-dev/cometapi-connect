@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security reports and account support
+    url: mailto:support@cometapi.com
+    about: Report vulnerabilities privately and get help with your CometAPI account.

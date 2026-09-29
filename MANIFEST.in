@@ -1,0 +1,10 @@
+include README.md LICENSE THIRD_PARTY_NOTICES.md AGENTS.md CLAUDE.md
+include CONTRIBUTING.md SECURITY.md ARCHITECTURE.md requirements.txt launch.py
+recursive-include docs *.md
+recursive-include scripts *.py *.sh *.json
+recursive-include packaging *.md *.png *.ico *.icns
+recursive-include packaging/licenses *
+recursive-include distribution *.md *.js
+recursive-include integrations *.md *.py
+recursive-include tests *.py *.cjs
+recursive-exclude * __pycache__ *.pyc .DS_Store

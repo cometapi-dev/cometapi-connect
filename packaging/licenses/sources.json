@@ -1,0 +1,14 @@
+[
+  {
+    "name": "LevelDB",
+    "file": "LEVELDB-LICENSE",
+    "source": "https://github.com/google/leveldb/blob/1.23/LICENSE",
+    "sha256": "ccc19f1da0798ed666609b65a5b44dd8b3abe6fc08b9c0592eb76e82e174db19"
+  },
+  {
+    "name": "Snappy",
+    "file": "SNAPPY-COPYING",
+    "source": "https://github.com/google/snappy/blob/1.2.1/COPYING",
+    "sha256": "55172044f7e241207117448a4d9d6ba1d0925c8ad66b5d4c08c70adfa9cc3de6"
+  }
+]

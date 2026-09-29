@@ -1,0 +1,426 @@
+[
+  {
+    "id": "claude-code",
+    "name": "Claude Code",
+    "category": "coding",
+    "mode": "guided",
+    "description": "Terminal coding agent with an Anthropic-compatible gateway setting.",
+    "homepage": "https://code.claude.com/",
+    "sources": [
+      "https://code.claude.com/docs/en/settings",
+      "https://code.claude.com/docs/en/env-vars",
+      "https://code.claude.com/docs/en/llm-gateway",
+      "https://apidoc.cometapi.com/integrations/claude-code"
+    ],
+    "detection": {
+      "commands": [
+        "claude"
+      ],
+      "home_paths": [
+        ".claude",
+        ".claude.json"
+      ],
+      "app_names": [],
+      "repo_names": [
+        "claude-code"
+      ]
+    },
+    "instructions": [
+      "Merge env settings in ~/.claude/settings.json: ANTHROPIC_BASE_URL=https://api.cometapi.com, ANTHROPIC_AUTH_TOKEN=your CometAPI key, and ANTHROPIC_MODEL=an exact CometAPI Anthropic-compatible model ID.",
+      "Restart Claude Code and inspect /status. Remove a conflicting stored ANTHROPIC_API_KEY when using bearer-token authentication."
+    ],
+    "caveats": [
+      "Use the API origin without /v1; this client uses the Anthropic Messages protocol.",
+      "Process environment, project settings or managed settings can override user settings.",
+      "First-run setup and workspace trust remain under the user's control."
+    ]
+  },
+  {
+    "id": "codex",
+    "name": "Codex CLI",
+    "category": "coding",
+    "mode": "guided",
+    "description": "Coding agent supporting a custom Responses API provider.",
+    "homepage": "https://developers.openai.com/codex/",
+    "sources": [
+      "https://learn.chatgpt.com/docs/config-file/config-reference"
+    ],
+    "detection": {
+      "commands": [
+        "codex"
+      ],
+      "home_paths": [
+        ".codex/config.toml"
+      ],
+      "app_names": [
+        "Codex"
+      ],
+      "repo_names": [
+        "codex"
+      ]
+    },
+    "instructions": [
+      "In ~/.codex/config.toml, add a cometapi model provider with base_url=https://api.cometapi.com/v1 and wire_api=responses, then select model_provider=cometapi and a CometAPI Responses-compatible model.",
+      "Supply authentication through env_key=COMETAPI_API_KEY with a launcher, or the supported experimental_bearer_token field in the private user config. Restart the CLI."
+    ],
+    "caveats": [
+      "Modern Codex only supports Responses, not Chat Completions.",
+      "A direct bearer token in config is plaintext; the official documentation prefers an environment-backed key.",
+      "An active profile may override the selected model. CLI configuration does not guarantee that every desktop or cloud task uses this provider."
+    ]
+  },
+  {
+    "id": "aider",
+    "name": "Aider",
+    "category": "coding",
+    "mode": "guided",
+    "description": "Terminal pair programmer with a documented user YAML configuration.",
+    "homepage": "https://aider.chat/",
+    "sources": [
+      "https://aider.chat/docs/llms/openai-compat.html",
+      "https://aider.chat/docs/config/aider_conf.html",
+      "https://aider.chat/docs/config/api-keys.html"
+    ],
+    "detection": {
+      "commands": [
+        "aider"
+      ],
+      "home_paths": [
+        ".aider.conf.yml"
+      ],
+      "app_names": [],
+      "repo_names": [
+        "aider"
+      ]
+    },
+    "instructions": [
+      "Merge openai-api-base: https://api.cometapi.com/v1, openai-api-key: your key, and model: openai/<CometAPI model ID> into ~/.aider.conf.yml.",
+      "Restart Aider in your project."
+    ],
+    "caveats": [
+      "The openai/ prefix selects Aider's routing provider; it is not part of the raw CometAPI model ID.",
+      "Project configuration, weak-model and editor-model settings may keep other models active.",
+      "Unknown models can require verified model metadata or an edit-format setting.",
+      "Some models need additional Aider metadata, such as use_temperature: false or an output allowance for reasoning. Endpoint and key setup does not configure every model capability."
+    ]
+  },
+  {
+    "id": "continue",
+    "name": "Continue",
+    "category": "coding",
+    "mode": "guided",
+    "description": "VS Code, JetBrains and CLI assistant with local YAML model definitions.",
+    "homepage": "https://www.continue.dev/",
+    "sources": [
+      "https://docs.continue.dev/customize/deep-dives/configuration",
+      "https://docs.continue.dev/reference",
+      "https://docs.continue.dev/faqs"
+    ],
+    "detection": {
+      "commands": [
+        "cn"
+      ],
+      "home_paths": [
+        ".continue",
+        ".vscode/extensions/continue.continue-*",
+        ".vscode-insiders/extensions/continue.continue-*"
+      ],
+      "app_names": [],
+      "repo_names": [
+        "continue"
+      ]
+    },
+    "instructions": [
+      "Add a CometAPI model to ~/.continue/config.yaml using provider: openai, apiBase: https://api.cometapi.com/v1, apiKey: your key, and the exact model ID.",
+      "Select Local Config and the CometAPI model in Continue. Use roles chat, edit and apply; configure other roles only for models that support them."
+    ],
+    "caveats": [
+      "Creating config.yaml supersedes legacy config.json; preserve or migrate existing settings first.",
+      "Cloud or saved configurations can remain selected until switched in the app.",
+      "Shell exports are insufficient for IDE extensions; separate secrets can use ~/.continue/.env."
+    ]
+  },
+  {
+    "id": "opencode",
+    "name": "OpenCode",
+    "category": "coding",
+    "mode": "guided",
+    "description": "Open-source coding agent with custom model-provider configuration.",
+    "homepage": "https://opencode.ai/",
+    "sources": [
+      "https://opencode.ai/docs/config/",
+      "https://opencode.ai/docs/providers/",
+      "https://opencode.ai/v2/docs/providers"
+    ],
+    "detection": {
+      "commands": [
+        "opencode",
+        "opencode2"
+      ],
+      "home_paths": [
+        ".config/opencode"
+      ],
+      "app_names": [
+        "OpenCode"
+      ],
+      "repo_names": [
+        "opencode"
+      ]
+    },
+    "instructions": [
+      "Check the installed OpenCode major version and edit the global opencode.json or opencode.jsonc under ~/.config/opencode.",
+      "For v1 add provider.cometapi with npm=@ai-sdk/openai-compatible and options.baseURL=https://api.cometapi.com/v1 plus options.apiKey. For v2 use providers.cometapi, package=@opencode/ai/providers/openai-compatible and settings instead.",
+      "Declare the exact model in the provider and select model=cometapi/<model ID>."
+    ],
+    "caveats": [
+      "Automatic setup is verified for OpenCode 1. OpenCode 2 is a separate beta executable (opencode2) with a changing schema; its setup is guided.",
+      "Use a Responses provider package for Responses-only models.",
+      "Project, custom-path and managed configurations can override the global model."
+    ]
+  },
+  {
+    "id": "gemini-cli",
+    "name": "Gemini CLI",
+    "category": "coding",
+    "mode": "guided",
+    "description": "Google's coding CLI with a native Gemini API base override.",
+    "homepage": "https://geminicli.com/",
+    "sources": [
+      "https://geminicli.com/docs/reference/configuration/",
+      "https://github.com/google-gemini/gemini-cli"
+    ],
+    "detection": {
+      "commands": [
+        "gemini"
+      ],
+      "home_paths": [
+        ".gemini"
+      ],
+      "app_names": [],
+      "repo_names": [
+        "gemini-cli"
+      ]
+    },
+    "instructions": [
+      "Automatic setup supports npm Gemini CLI 0.58.0 on macOS/Linux with bash or zsh, and 0.60.0 on Windows in the standard PowerShell 7 console. The helper installs a private launcher and shell function for new interactive terminals.",
+      "The helper writes native API-key authentication and a Gemini model in .gemini/settings.json. It provides GEMINI_API_KEY and GOOGLE_GEMINI_BASE_URL only to the launched CLI."
+    ],
+    "caveats": [
+      "Gemini uses its native protocol at https://api.cometapi.com, without an OpenAI /v1 suffix.",
+      "Gemini CLI 0.23.0 is not supported for automatic setup because it does not honor the isolated home setting.",
+      "Existing shell aliases/functions and incompatible entry-point layouts require a dedicated adapter. Windows CMD, Windows PowerShell 5, custom-host profiles and shells that disable profile loading are not configured. Execution policy remains unchanged. Reopen the terminal after setup. Absolute-path invocations do not load the shell function.",
+      "Workspace trust, existing tools and approvals remain unchanged. An untrusted workspace may still need its normal explicit trust decision."
+    ]
+  },
+  {
+    "id": "goose",
+    "name": "Goose",
+    "category": "coding",
+    "mode": "guided",
+    "description": "Open-source desktop and CLI agent with custom OpenAI-compatible providers.",
+    "homepage": "https://github.com/aaif-goose/goose",
+    "sources": [
+      "https://github.com/aaif-goose/goose/blob/main/documentation/docs/getting-started/providers.md",
+      "https://github.com/aaif-goose/goose/blob/main/documentation/docs/guides/config-files.md"
+    ],
+    "detection": {
+      "commands": [
+        "goose"
+      ],
+      "home_paths": [
+        ".config/goose",
+        "AppData/Roaming/Block/goose"
+      ],
+      "app_names": [
+        "Goose"
+      ],
+      "repo_names": [
+        "goose"
+      ]
+    },
+    "instructions": [
+      "Open Goose Settings or goose configure and create a custom OpenAI-compatible provider named CometAPI.",
+      "Use the full custom-provider URL https://api.cometapi.com/v1/chat/completions, enter the exact model ID, and enter the key through Goose's credential prompt.",
+      "Select the new provider and model, then start a new Goose session."
+    ],
+    "caveats": [
+      "API keys in config.yaml are ignored; Goose uses the system keyring or its configured secret-storage backend.",
+      "Current config uses active_provider/providers; older flat GOOSE_PROVIDER and GOOSE_MODEL fields are legacy.",
+      "Custom provider URL semantics differ from a generic OpenAI base URL."
+    ]
+  },
+  {
+    "id": "zed",
+    "name": "Zed",
+    "category": "coding",
+    "mode": "guided",
+    "description": "Code editor with custom OpenAI-compatible model access.",
+    "homepage": "https://zed.dev/",
+    "sources": [
+      "https://zed.dev/docs/ai/use-api-access"
+    ],
+    "detection": {
+      "commands": [
+        "zed"
+      ],
+      "home_paths": [
+        ".config/zed",
+        "AppData/Roaming/Zed"
+      ],
+      "app_names": [
+        "Zed",
+        "Zed Preview"
+      ],
+      "repo_names": [
+        "zed"
+      ]
+    },
+    "instructions": [
+      "Run agent: open settings in Zed and choose Add Provider under LLM Providers.",
+      "Create an OpenAI-compatible CometAPI provider with API URL https://api.cometapi.com/v1, the exact model ID and its verified context limit.",
+      "Enter the key in Zed's provider UI and select that model."
+    ],
+    "caveats": [
+      "API keys belong in Zed's credential UI or provider environment variable, not settings.json.",
+      "Responses-only models need capabilities.chat_completions=false.",
+      "External agents and terminal threads have their own provider configuration."
+    ]
+  },
+  {
+    "id": "cline",
+    "name": "Cline",
+    "category": "coding",
+    "mode": "guided",
+    "description": "Coding assistant with an OpenAI Compatible provider selection.",
+    "homepage": "https://cline.bot/",
+    "sources": [
+      "https://docs.cline.bot/provider-config/openai-compatible"
+    ],
+    "detection": {
+      "commands": [
+        "cline"
+      ],
+      "home_paths": [
+        ".vscode/extensions/saoudrizwan.claude-dev-*",
+        ".vscode-insiders/extensions/saoudrizwan.claude-dev-*",
+        ".cursor/extensions/saoudrizwan.claude-dev-*"
+      ],
+      "app_names": [],
+      "repo_names": [
+        "cline"
+      ]
+    },
+    "instructions": [
+      "Open Cline Settings and select OpenAI Compatible as the API provider.",
+      "Set Base URL to https://api.cometapi.com/v1, enter your CometAPI key, and enter the exact model ID.",
+      "Use Verify when available, and select compatible tool/image capabilities only if supported by the model."
+    ],
+    "caveats": [
+      "The extension's credential store is not a supported external configuration file.",
+      "Model tool calling and streaming compatibility must match the selected model."
+    ]
+  },
+  {
+    "id": "roo-code",
+    "name": "Roo Code",
+    "category": "coding",
+    "mode": "guided",
+    "description": "Coding extension with an OpenAI-compatible provider and native tools.",
+    "homepage": "https://github.com/RooCodeInc/Roo-Code",
+    "sources": [
+      "https://roocodeinc.github.io/Roo-Code/providers/openai-compatible/"
+    ],
+    "detection": {
+      "commands": [],
+      "home_paths": [
+        ".vscode/extensions/rooveterinaryinc.roo-cline-*",
+        ".vscode-insiders/extensions/rooveterinaryinc.roo-cline-*",
+        ".cursor/extensions/rooveterinaryinc.roo-cline-*"
+      ],
+      "app_names": [],
+      "repo_names": [
+        "Roo-Code"
+      ]
+    },
+    "instructions": [
+      "Open Roo Code Settings and select OpenAI Compatible.",
+      "Enter https://api.cometapi.com/v1, your CometAPI key and an exact model ID supporting native OpenAI-style tool calling."
+    ],
+    "caveats": [
+      "Native tool calling is required; Roo no longer offers an XML tool fallback.",
+      "Use the extension's supported settings or import UI for credentials."
+    ]
+  },
+  {
+    "id": "kilo-code",
+    "name": "Kilo Code",
+    "category": "coding",
+    "mode": "guided",
+    "description": "Coding agent and extension with custom providers across several API protocols.",
+    "homepage": "https://kilo.ai/",
+    "sources": [
+      "https://kilo.ai/docs/code-with-ai/agents/custom-models",
+      "https://kilo.ai/docs/getting-started/setup-authentication"
+    ],
+    "detection": {
+      "commands": [
+        "kilo"
+      ],
+      "home_paths": [
+        ".config/kilo",
+        ".vscode/extensions/kilocode.kilo-code-*",
+        ".vscode-insiders/extensions/kilocode.kilo-code-*",
+        ".cursor/extensions/kilocode.kilo-code-*"
+      ],
+      "app_names": [
+        "Kilo Code"
+      ],
+      "repo_names": [
+        "kilocode",
+        "kilo"
+      ]
+    },
+    "instructions": [
+      "Open Kilo Settings → Providers and add a custom provider with ID cometapi.",
+      "For Chat Completions use OpenAI Compatible and base URL https://api.cometapi.com/v1; select Responses or Messages for models requiring those protocols.",
+      "Enter your CometAPI key, add the exact model ID and choose it from the model picker."
+    ],
+    "caveats": [
+      "Current Kilo uses kilo.json(c) provider configuration; older extensions use different storage.",
+      "Global config can resolve environment/file secrets; repository config has tighter secret-resolution restrictions.",
+      "Context limits and native tool capabilities should match the model's verified metadata."
+    ]
+  },
+  {
+    "id": "github-copilot",
+    "name": "VS Code / GitHub Copilot Chat",
+    "category": "coding",
+    "mode": "guided",
+    "description": "VS Code chat and agent features can use a Custom Endpoint provider.",
+    "homepage": "https://code.visualstudio.com/",
+    "sources": [
+      "https://code.visualstudio.com/docs/agent-customization/language-models",
+      "https://code.visualstudio.com/docs/agents/concepts/language-models"
+    ],
+    "detection": {
+      "commands": [],
+      "home_paths": [
+        ".vscode/extensions/github.copilot-chat-*",
+        ".vscode/extensions/github.copilot-*",
+        ".vscode-insiders/extensions/github.copilot-chat-*"
+      ],
+      "app_names": [],
+      "repo_names": []
+    },
+    "instructions": [
+      "Run Chat: Manage Language Models in VS Code, choose Add Models → Custom Endpoint, and name the group CometAPI.",
+      "Enter the key through the secure input prompt and select the matching API type.",
+      "In chatLanguageModels.json, use vendor=customendpoint and configure the exact model plus its full endpoint: https://api.cometapi.com/v1/chat/completions, /v1/responses or /v1/messages as appropriate. Select the model in chat."
+    ],
+    "caveats": [
+      "The old github.copilot.chat.customOAIModels setting is deprecated.",
+      "Keys should use secure input variables rather than a private database edit.",
+      "This configures chat/agent and utility tasks; inline completions and embedding-dependent features have separate requirements."
+    ]
+  }
+]
